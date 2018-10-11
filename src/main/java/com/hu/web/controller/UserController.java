@@ -25,12 +25,16 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.hu.dto.User;
 import com.hu.exception.UserNotExistException;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
 	
 	@PostMapping
+	@ApiOperation(value="创建用户")
 	public User create(@Valid @RequestBody User user,BindingResult errors) {
 		
 		if (errors.hasErrors()) {
@@ -49,6 +53,7 @@ public class UserController {
 	
 	@GetMapping
 	@JsonView(User.UserSimpleView.class)
+	@ApiOperation(value = "用户查询服务")
 	public List<User> query() {
 		List<User> users = new ArrayList<>();
 		users.add(new User());
@@ -59,13 +64,13 @@ public class UserController {
 	
 	@GetMapping("/{id:\\d+}")
 	@JsonView(User.UserDetailView.class)
-	public User getInfo(@PathVariable String id) {
+	public User getInfo(@ApiParam("用户id") @PathVariable String id) {
 		
-		throw new UserNotExistException(id);
+//		throw new UserNotExistException(id);
 		
-//		User user = new User();
-//		user.setUsername("tom");
-//		return user;
+		User user = new User();
+		user.setUsername("tom");
+		return user;
 	}
 	
 	@PutMapping("/{id:\\d+}")

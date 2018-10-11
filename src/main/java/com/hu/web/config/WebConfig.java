@@ -7,20 +7,36 @@ package com.hu.web.config;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.hu.web.filter.TimeFilter;
+import com.hu.web.interceptor.TimeInterceptor;
 
 /**
  * @author Administrator
  *
  */
 @Configuration
-public class WebConfig {
+public class WebConfig extends WebMvcConfigurerAdapter {
+	
+	
 
-	@Bean
+//	@Autowired
+//	private TimeInterceptor timeInterceptor;
+//	
+//	@Override
+//	public void addInterceptors(InterceptorRegistry registry) {
+//		registry.addInterceptor(timeInterceptor);
+//	}
+//	
+
+
+//	@Bean
 	public FilterRegistrationBean timeFilter() {
 		FilterRegistrationBean registrationBean = new FilterRegistrationBean();
 		
