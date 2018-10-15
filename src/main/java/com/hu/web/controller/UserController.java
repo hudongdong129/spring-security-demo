@@ -10,6 +10,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.data.annotation.CreatedBy;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,11 @@ import io.swagger.annotations.ApiParam;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+	
+	@GetMapping("/me")
+	public Object getCurrentUser() {
+		return SecurityContextHolder.getContext().getAuthentication();
+	}
 	
 	@PostMapping
 	@ApiOperation(value="创建用户")
