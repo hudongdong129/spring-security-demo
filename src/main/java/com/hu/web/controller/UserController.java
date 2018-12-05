@@ -10,6 +10,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -60,7 +61,10 @@ public class UserController {
 	@GetMapping
 	@JsonView(User.UserSimpleView.class)
 	@ApiOperation(value = "用户查询服务")
-	public List<User> query() {
+	public List<User> query(Pageable pageable) {
+		System.out.println(pageable.getPageNumber());
+		System.out.println(pageable.getPageSize());
+		System.out.println(pageable.getSort());
 		List<User> users = new ArrayList<>();
 		users.add(new User());
 		users.add(new User());

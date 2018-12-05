@@ -1,5 +1,5 @@
 /**
- * @author huDong
+  * @author huDong
  */
 package com.hu.web.aspect;
 
@@ -34,7 +34,7 @@ public class QueueListener implements ApplicationListener<ContextRefreshedEvent>
 				if (StringUtils.isNotBlank(mockQueue.getCompleteOrder())) {
 					
 					String orderNumber = mockQueue.getCompleteOrder();
-					logger.info("返回订单处理结果：" + orderNumber);
+					 logger.info("返回订单处理结果：" + orderNumber);
 					deferredResultHolder.getMap().get(orderNumber).setResult("place order success");
 					mockQueue.setCompleteOrder(null);
 					

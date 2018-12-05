@@ -51,9 +51,12 @@ public class UserControllerTest {
 	@Test
 	public void whenQuerySuccess() throws Exception {
 		String result = mockMvc.perform(get("/user")
+				.param("size", "18")
+				.param("page", "3")
+				.param("sort", "age,desc")
 				.contentType(MediaType.APPLICATION_JSON_UTF8))
-				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(3))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.length()").value(3))
 				.andReturn().getResponse().getContentAsString();
 		System.out.println(result);
 	}
