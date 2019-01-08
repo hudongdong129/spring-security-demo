@@ -11,7 +11,10 @@ import javax.validation.Valid;
 
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,8 +39,9 @@ import io.swagger.annotations.ApiParam;
 public class UserController {
 	
 	@GetMapping("/me")
-	public Object getCurrentUser() {
-		return SecurityContextHolder.getContext().getAuthentication();
+	public Object getCurrentUser(@AuthenticationPrincipal UserDetails user) {
+//		return SecurityContextHolder.getContext().getAuthentication();
+		return user;
 	}
 	
 	@PostMapping
@@ -76,11 +80,11 @@ public class UserController {
 	@JsonView(User.UserDetailView.class)
 	public User getInfo(@ApiParam("用户id") @PathVariable String id) {
 		
-//		throw new UserNotExistException(id);
+		throw new UserNotExistException(id);
 		
-		User user = new User();
-		user.setUsername("tom");
-		return user;
+//		User user = new User();
+//		user.setUsername("tom");
+//		return user;
 	}
 	
 	@PutMapping("/{id:\\d+}")

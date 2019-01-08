@@ -29,6 +29,5 @@ public class UserNotExistException extends RuntimeException {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
-	
+		
 }

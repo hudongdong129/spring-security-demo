@@ -47,7 +47,6 @@ public class MockQueue {
 	public void setCompleteOrder(String completeOrder) {
 		this.completeOrder = completeOrder;
 	}
-	
-	
-	
 }
+	
+	
