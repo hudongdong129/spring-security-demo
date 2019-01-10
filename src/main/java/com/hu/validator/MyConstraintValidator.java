@@ -28,6 +28,10 @@ public class MyConstraintValidator implements ConstraintValidator<MyConstraint, 
 
 	@Override
 	public boolean isValid(Object value, ConstraintValidatorContext context) {
+		String name = (String)value;
+		if ("toms".equals(name)) {
+			return true;
+		}
 		helloService.greeting("tom");
 		System.out.println(value);
 		return false;

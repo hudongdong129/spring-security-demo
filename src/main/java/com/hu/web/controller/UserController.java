@@ -7,14 +7,17 @@ package com.hu.web.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,16 +35,30 @@ import com.hu.exception.UserNotExistException;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.web.context.request.ServletWebRequest;
 
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
+	@Autowired
+	private ProviderSignInUtils providerSignInUtils;
 	
 	@GetMapping("/me")
 	public Object getCurrentUser(@AuthenticationPrincipal UserDetails user) {
 //		return SecurityContextHolder.getContext().getAuthentication();
 		return user;
+	}
+
+
+	@PostMapping("/regist")
+	public void regist(User user, HttpServletRequest request) {
+
+		//注册用户
+		String userId = user.getUsername();
+		providerSignInUtils.doPostSignUp(userId,new ServletWebRequest(request));
+
 	}
 	
 	@PostMapping

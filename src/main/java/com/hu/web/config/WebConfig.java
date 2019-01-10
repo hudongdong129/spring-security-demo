@@ -21,6 +21,7 @@ import com.hu.web.interceptor.TimeInterceptor;
  * @author Administrator
  *
  */
+//这个类是一个配置类
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
 	
